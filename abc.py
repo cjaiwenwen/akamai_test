@@ -2,7 +2,7 @@
 
 import requests
 from urlparse import urljoin
-from akamai.edgegrid import EdgeGridAuth
+from akamai.edgegrid import EdgeGridAuth, EdgeRc
 from config import EdgeGridConfig
 from http_calls import EdgeGridHttpCaller
 import random
@@ -16,7 +16,7 @@ edgerc = EdgeRc("/var/jenkins_home/workspace/akamai_test/.edgerc")
 
 config = EdgeGridConfig({"verbose":False},section_name)
 #baseurl = '%s://%s/' % ('https', config.host)
-baseurl = 'https://%s'%edgerc.get(section,'host')
+baseurl = 'https://%s'%edgerc.get(section_name, 'host')
 
 s = requests.Session()
 
@@ -25,7 +25,7 @@ s = requests.Session()
 #            client_secret=config.client_secret,
 #            access_token=config.access_token
 #)
-s.auth = EdgeGridAuth.from_edgerc(edgerc, section)
+s.auth = EdgeGridAuth.from_edgerc(edgerc, section_name)
 
 httpCaller = EdgeGridHttpCaller(s,debug,verbose,baseurl)
 
