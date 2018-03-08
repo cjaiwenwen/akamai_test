@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import requests
 from urlparse import urljoin
 from akamai.edgegrid import EdgeGridAuth
