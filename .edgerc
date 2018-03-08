@@ -1,0 +1,17 @@
+[default]
+client_secret = zQtOSUvjY5YPs953NIXNkvJQ3jDfyWCKLs9uGhnWatE=
+host = akab-nncvkmov5ebjtmy5-wszz3cqirmefgkn7.luna.akamaiapis.net
+access_token = akab-2l3wh7tumycg4buw-hmmhsuqp4qxbf6b6
+client_token = akab-ykktmjocsjg5pv6v-eazbp6if7sdz4muc
+
+[ccu]
+client_secret = JHOnKNE3F5Kj95C493EZilX1x8WF7Y9Gb2B6wYy+PEg=
+host = akab-zljl5utdrmv5okqv-m42uijvag3hv2444.purge.akamaiapis.net
+access_token = akab-x3f5xgzwvbkjvlom-h52po2vqpkdgnofo
+client_token = akab-uxro6i3vsy446gns-6xcg52jxxqced63j
+
+[papi]
+client_secret = 0doqobvWTlE67WvexvMBljoPFS6we/Qhd06/jvHhQEk=
+host = akab-k2xkiy23rrusrdph-q5l2kvdaiqvylisj.luna.akamaiapis.net
+access_token = akab-5n3beiyb6yhpjzmr-wonafgvsgpd5ca5h
+client_token = akab-kary354z3slfsrhx-sw5comkgn7f4qt6c
