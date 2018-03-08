@@ -12,18 +12,20 @@ verbose = False
 
 section_name = "default"
 
-
+edgerc = EdgeRc("/var/jenkins_home/workspace/akamai_test/.edgerc")
 
 config = EdgeGridConfig({"verbose":False},section_name)
-baseurl = '%s://%s/' % ('https', config.host)
+#baseurl = '%s://%s/' % ('https', config.host)
+baseurl = 'https://%s'%edgerc.get(section,'host')
 
 s = requests.Session()
 
-s.auth = EdgeGridAuth(
-            client_token=config.client_token,
-            client_secret=config.client_secret,
-            access_token=config.access_token
-)
+#s.auth = EdgeGridAuth(
+#            client_token=config.client_token,
+#            client_secret=config.client_secret,
+#            access_token=config.access_token
+#)
+s.auth = EdgeGridAuth.from_edgerc(edgerc, section)
 
 httpCaller = EdgeGridHttpCaller(s,debug,verbose,baseurl)
 
