@@ -25,6 +25,7 @@ s = requests.Session()
 #            client_secret=config.client_secret,
 #            access_token=config.access_token
 #)
+
 s.auth = EdgeGridAuth.from_edgerc(edgerc, section_name)
 
 httpCaller = EdgeGridHttpCaller(s,debug,verbose,baseurl)
@@ -50,3 +51,17 @@ dig_result = httpCaller.getResult("/diagnostic-tools/v2/ghost-locations/%s/dig-i
 
 # Display the results from dig
 print (dig_result['digInfo']['result'])
+
+t.auth = EdgeGridAuth.from_edgerc(edgerc, section_name)
+
+httpCaller_t = EdgeGridHttpCaller(t,debug,verbose,baseurl)
+
+purge_obj = {
+	"objects" : [
+		"https://junchen.sandbox.akamaideveloper.com/index.html"
+	]
+}
+
+print ("Adding invalidate request to queue - %s" % (json.dumps(purge_obj)));
+
+purge_post_result = httpCaller_t.postResult('/ccu/v3/invalidate/url', json.dumps(purge_obj))
