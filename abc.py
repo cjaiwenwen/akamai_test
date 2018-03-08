@@ -6,20 +6,22 @@ from akamai.edgegrid import EdgeGridAuth, EdgeRc
 from config import EdgeGridConfig
 from http_calls import EdgeGridHttpCaller
 import random
+import json
 
 debug = False
 verbose = False
 
 section_name = "default"
+section_ccu = "ccu"
 
 edgerc = EdgeRc("/var/jenkins_home/workspace/akamai_test/.edgerc")
 
-config = EdgeGridConfig({"verbose":False},section_name)
+#config = EdgeGridConfig({"verbose":False},section_name)
 #baseurl = '%s://%s/' % ('https', config.host)
 baseurl = 'https://%s'%edgerc.get(section_name, 'host')
 
 s = requests.Session()
-
+t = requests.Session()
 #s.auth = EdgeGridAuth(
 #            client_token=config.client_token,
 #            client_secret=config.client_secret,
@@ -52,16 +54,22 @@ dig_result = httpCaller.getResult("/diagnostic-tools/v2/ghost-locations/%s/dig-i
 # Display the results from dig
 print (dig_result['digInfo']['result'])
 
-t.auth = EdgeGridAuth.from_edgerc(edgerc, section_name)
+#config_t = EdgeGridConfig({"verbose":False},section_ccu)
+#baseurl = '%s://%s/' % ('https', config.host)
+baseurl_t = 'https://%s'%edgerc.get(section_ccu, 'host')
 
-httpCaller_t = EdgeGridHttpCaller(t,debug,verbose,baseurl)
+t.auth = EdgeGridAuth.from_edgerc(edgerc, section_ccu)
+
+httpCaller_t = EdgeGridHttpCaller(t,debug,verbose,baseurl_t)
 
 purge_obj = {
 	"objects" : [
-		"https://junchen.sandbox.akamaideveloper.com/index.html"
+		"https://khunter.sandbox.akamaideveloper.com/index.html"
 	]
 }
 
 print ("Adding invalidate request to queue - %s" % (json.dumps(purge_obj)));
 
 purge_post_result = httpCaller_t.postResult('/ccu/v3/invalidate/url', json.dumps(purge_obj))
+
+print purge_post_result
