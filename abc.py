@@ -2,7 +2,7 @@
 
 import requests
 from urlparse import urljoin
-from akamai.edgegrid import EdgeGridAuth, EdgeRc
+from akamai.edgegrid import EdgeGridAuth
 from config import EdgeGridConfig
 from http_calls import EdgeGridHttpCaller
 import random
@@ -10,9 +10,9 @@ import random
 debug = False
 verbose = False
 
-edgerc = EdgeRc("$WORKSPACE/.edgerc")
-
 section_name = "default"
+
+
 
 config = EdgeGridConfig({"verbose":False},section_name)
 baseurl = '%s://%s/' % ('https', config.host)
