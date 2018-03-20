@@ -56,20 +56,3 @@ print (dig_result['digInfo']['result'])
 
 #config_t = EdgeGridConfig({"verbose":False},section_ccu)
 #baseurl = '%s://%s/' % ('https', config.host)
-baseurl_t = 'https://%s'%edgerc.get(section_ccu, 'host')
-
-t.auth = EdgeGridAuth.from_edgerc(edgerc, section_ccu)
-
-httpCaller_t = EdgeGridHttpCaller(t,debug,verbose,baseurl_t)
-
-purge_obj = {
-	"objects" : [
-		"https://khunter.sandbox.akamaideveloper.com/index.html"
-	]
-}
-
-print ("Adding invalidate request to queue - %s" % (json.dumps(purge_obj)));
-
-purge_post_result = httpCaller_t.postResult('/ccu/v3/invalidate/url', json.dumps(purge_obj))
-
-print purge_post_result
